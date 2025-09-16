@@ -198,7 +198,7 @@ def create_visualizations():
     st.header("📊 Metaphysical Visualizations")
     
     # Tabs for different visualizations
-    tab1, tab2, tab3, tab4 = st.tabs(["Linear vs Sinusoidal", "3D Spherical Reality", "Epsilon Scale", "Interactive Explorer"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Linear vs Sinusoidal", "3D Spherical Reality", "Wave-Perturbed Reality", "Epsilon Scale", "Interactive Explorer"])
     
     with tab1:
         col1, col2 = st.columns(2)
@@ -240,6 +240,82 @@ def create_visualizations():
         st.info("💡 **Insight**: Every point on this sphere exists only in relation to all other points - no isolated existence possible.")
     
     with tab3:
+        st.subheader("Wave-Perturbed Reality: Perfect Forms Dissolve")
+        
+        # Controls for the perturbation
+        col1, col2 = st.columns(2)
+        with col1:
+            wave_frequency = st.slider("Wave Frequency", 1, 10, 5, 1, 
+                                     help="How many waves appear on the sphere surface")
+        with col2:
+            perturbation_strength = st.slider("Perturbation Strength", 0.0, 0.5, 0.2, 0.05,
+                                            help="How much the waves distort the perfect sphere")
+        
+        # Create the perturbed sphere
+        phi = np.linspace(0, np.pi, 50)   # polar angle
+        theta = np.linspace(0, 2*np.pi, 50)  # azimuthal angle
+        phi, theta = np.meshgrid(phi, theta)
+        
+        # Base radius
+        r = 1
+        
+        # Perturb the radius with sinusoidal function
+        perturb = perturbation_strength * np.sin(wave_frequency*theta) * np.sin(wave_frequency*phi)
+        r_perturbed = r + perturb
+        
+        # Convert spherical to Cartesian coordinates
+        x = r_perturbed * np.sin(phi) * np.cos(theta)
+        y = r_perturbed * np.sin(phi) * np.sin(theta)
+        z = r_perturbed * np.cos(phi)
+        
+        # Create comparison: perfect vs perturbed
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.write("**Perfect Sphere (Platonic Ideal)**")
+            # Perfect sphere
+            x_perfect = 1 * np.sin(phi) * np.cos(theta)
+            y_perfect = 1 * np.sin(phi) * np.sin(theta)
+            z_perfect = 1 * np.cos(phi)
+            
+            fig_perfect = go.Figure(data=[go.Surface(x=x_perfect, y=y_perfect, z=z_perfect, 
+                                                   colorscale="Blues", opacity=0.8)])
+            fig_perfect.update_layout(scene=dict(aspectmode="cube", 
+                                               xaxis=dict(range=[-1.5, 1.5]),
+                                               yaxis=dict(range=[-1.5, 1.5]),
+                                               zaxis=dict(range=[-1.5, 1.5])),
+                                    title="Geometric Ideal")
+            st.plotly_chart(fig_perfect, use_container_width=True)
+        
+        with col2:
+            st.write("**Wave-Perturbed Reality (ε-Scale Truth)**")
+            # Perturbed sphere
+            fig_perturbed = go.Figure(data=[go.Surface(x=x, y=y, z=z, 
+                                                     colorscale="Plasma", opacity=0.8)])
+            fig_perturbed.update_layout(scene=dict(aspectmode="cube",
+                                                 xaxis=dict(range=[-1.5, 1.5]),
+                                                 yaxis=dict(range=[-1.5, 1.5]),
+                                                 zaxis=dict(range=[-1.5, 1.5])),
+                                      title="Sinusoidal Reality")
+            st.plotly_chart(fig_perturbed, use_container_width=True)
+        
+        # Metaphysical explanation
+        if perturbation_strength > 0.1:
+            st.success("🌊 **Epsilon Revelation**: Even 'perfect' geometric forms dissolve into wave patterns when examined closely!")
+        else:
+            st.info("💡 Increase perturbation strength to see how geometric ideals become wave-reality at the ε-scale.")
+        
+        st.markdown("""
+        **Metaphysical Insight**: This demonstrates that what Plato called "perfect Forms" are actually 
+        sinusoidal perturbations when examined at the epsilon (ε) scale. The "perfect sphere" is a 
+        macroscopic approximation - reality's foundation is wave-like vibration.
+        
+        - **Left**: The Platonic ideal - what we think reality should be
+        - **Right**: Actual reality - waves perturbing perfect forms
+        - **Truth**: Geometry itself emerges from underlying sinusoidal patterns
+        """)
+    
+    with tab4:
         st.subheader("Epsilon (ε) Scale Revelation")
         epsilon_scale = st.slider("Zoom to Epsilon Scale", 0.01, 1.0, 0.1, 0.01)
         
@@ -257,14 +333,15 @@ def create_visualizations():
         if epsilon_scale < 0.05:
             st.success("🎯 **Linearity Collapses!** At this scale, everything is wave-like.")
     
-    with tab4:
+    with tab5:
         st.subheader("Interactive Metaphysical State Explorer")
         mode = st.selectbox("Choose metaphysical perspective:", [
             "Linear Illusion (Macroscopic)",
             "Sinusoidal Emergence (ε Scale)",
             "3D Transcendence (Dimensional)",
             "Point Interdependence (Relational)",
-            "Spherical Totality (Holographic)"
+            "Spherical Totality (Holographic)",
+            "Wave-Perturbed Forms (Epsilon Reality)"
         ])
         
         if mode == "Linear Illusion (Macroscopic)":
@@ -282,6 +359,22 @@ def create_visualizations():
         elif mode == "Spherical Totality (Holographic)":
             st.write("**State**: Complete holographic reality where each part contains the whole")
             # Show sphere visualization
+        elif mode == "Wave-Perturbed Forms (Epsilon Reality)":
+            st.write("**State**: Perfect geometric forms reveal their sinusoidal foundation")
+            # Quick perturbed sphere
+            phi_quick = np.linspace(0, np.pi, 25)
+            theta_quick = np.linspace(0, 2*np.pi, 25)
+            phi_quick, theta_quick = np.meshgrid(phi_quick, theta_quick)
+            r_quick = 1 + 0.15 * np.sin(4*theta_quick) * np.sin(4*phi_quick)
+            x_quick = r_quick * np.sin(phi_quick) * np.cos(theta_quick)
+            y_quick = r_quick * np.sin(phi_quick) * np.sin(theta_quick)
+            z_quick = r_quick * np.cos(phi_quick)
+            
+            fig_quick = go.Figure(data=[go.Surface(x=x_quick, y=y_quick, z=z_quick, 
+                                                 colorscale="Plasma", opacity=0.8)])
+            fig_quick.update_layout(scene=dict(aspectmode="cube"), 
+                                  title="Geometric Forms at Epsilon Scale")
+            st.plotly_chart(fig_quick, use_container_width=True)
 
 # Main Application Layout
 st.title("🧠 PHL 201: Metaphysics CognitiveCloud.ai")
