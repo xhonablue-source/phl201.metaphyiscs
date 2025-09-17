@@ -500,32 +500,91 @@ elif page == "Resources & Further Reading":
         with col1:
             st.markdown("### 📚 Essential First Reads")
             
+            # Stanford Encyclopedia button - opens link
             if st.button("📖 Stanford Encyclopedia: Metaphysics", use_container_width=True):
-                st.markdown("**[Stanford Encyclopedia of Philosophy - Metaphysics](https://plato.stanford.edu/entries/metaphysics/)**")
-                st.info("Authoritative overview of metaphysical concepts - perfect for understanding the foundations behind our symbolic framework.")
+                st.markdown("**Opening Stanford Encyclopedia of Philosophy...**")
+                st.markdown("**[Click here to access: Stanford Encyclopedia - Metaphysics](https://plato.stanford.edu/entries/metaphysics/)**")
+                st.success("Authoritative overview of metaphysical concepts - perfect for understanding the foundations behind our symbolic framework.")
             
+            # Nagel PDF button  
             if st.button("🧠 What Does It All Mean? (Free PDF)", use_container_width=True):
                 st.markdown("**Thomas Nagel's Classic Introduction**")
-                st.info("Check your university library's digital access or [Project MUSE](https://muse.jhu.edu/) for this essential text.")
+                st.markdown("**[Access through Internet Archive](https://archive.org/details/whatdoesitallmea0000nage)**")
+                st.success("Essential 100-page introduction to philosophy. Check your university library's digital access for the latest edition.")
             
+            # Philosophy Bites button
             if st.button("🎭 Philosophy Bites Podcast", use_container_width=True):
-                st.markdown("**[Philosophy Bites](https://www.philosophybites.com/)**")
-                st.info("15-minute philosophy podcasts with world-class philosophers. Start with their logic and metaphysics episodes.")
+                st.markdown("**[Listen to Philosophy Bites](https://www.philosophybites.com/)**")
+                st.success("15-minute philosophy podcasts with world-class philosophers. Start with their logic and metaphysics episodes.")
+                
+                # Show recent episode suggestions
+                st.markdown("**Recommended episodes:**")
+                st.markdown("- 'Logic and Language' with Susan Haack")
+                st.markdown("- 'Metaphysics' with Peter van Inwagen") 
+                st.markdown("- 'What is Philosophy?' with Simon Critchley")
         
         with col2:
             st.markdown("### 🔗 Logic Foundations")
             
+            # Interactive Logic Tutorial
             if st.button("⚡ Interactive Logic Tutorial", use_container_width=True):
-                st.markdown("**[Logitext - Visual Logic](https://logitext.mit.edu/)**")
-                st.info("MIT's interactive logic tool. Practice the symbols we explore in class with immediate feedback.")
+                st.markdown("**[Open Logitext - MIT's Visual Logic Tool](https://logitext.mit.edu/main)**")
+                st.success("MIT's interactive logic tool. Practice the symbols we explore in class with immediate feedback.")
+                
+                # Embed a simple logic exercise
+                st.markdown("**Try this in Logitext:**")
+                st.code("P ∧ Q → R")
+                st.info("This reads: 'If P and Q, then R' - notice how ∧ shows convergence leading to implication →")
             
+            # Truth Table Generator  
             if st.button("🎯 Truth Table Generator", use_container_width=True):
-                st.markdown("**[Logic Calculator](https://web.stanford.edu/class/cs103/tools/truth-table-tool/)**")
-                st.info("Stanford's tool for testing logical expressions. Input ∧, ∨, ¬ and see how they work.")
+                st.markdown("**[Open Stanford Truth Table Tool](https://web.stanford.edu/class/cs103/tools/truth-table-tool/)**")
+                st.success("Stanford's tool for testing logical expressions. Input ∧, ∨, ¬ and see how they work.")
+                
+                # Show embedded truth table example
+                st.markdown("**Quick example - try this expression: `P ∧ Q`**")
+                col_a, col_b, col_c, col_d = st.columns(4)
+                with col_a:
+                    st.write("**P**")
+                    st.write("T")
+                    st.write("T") 
+                    st.write("F")
+                    st.write("F")
+                with col_b:
+                    st.write("**Q**")
+                    st.write("T")
+                    st.write("F")
+                    st.write("T") 
+                    st.write("F")
+                with col_c:
+                    st.write("**P∧Q**")
+                    st.write("T")
+                    st.write("F")
+                    st.write("F")
+                    st.write("F")
+                with col_d:
+                    st.write("**Meaning**")
+                    st.write("Both true")
+                    st.write("P true, Q false")
+                    st.write("P false, Q true")
+                    st.write("Both false")
             
+            # Argument Mapper
             if st.button("📊 Argument Mapper", use_container_width=True):
-                st.markdown("**[Argument Mapping Tools](https://arguman.org/)**")
-                st.info("Visual argument analysis - see how premises connect to conclusions geometrically.")
+                st.markdown("**[Open Rationale Online](https://www.rationaleonline.com/)**")
+                st.success("Visual argument analysis - see how premises connect to conclusions geometrically.")
+                
+                # Show argument structure example
+                st.markdown("**Example argument structure:**")
+                st.markdown("""
+                ```
+                Premise 1: All logic symbols have geometric meaning
+                Premise 2: ∧ is a logic symbol
+                ────────────────────────────────────────────────
+                Conclusion: Therefore, ∧ has geometric meaning
+                ```
+                """)
+                st.info("Notice the geometric flow from premises to conclusion - just like ∧ shows convergence!")
     
     with tab2:
         st.subheader("🔧 Interactive Logic Practice")
