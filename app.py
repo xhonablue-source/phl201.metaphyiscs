@@ -387,7 +387,8 @@ with st.sidebar:
         "Course Overview", 
         "Interactive Quiz", 
         "Visualizations", 
-        "Logic Symbol Reference"
+        "Logic Symbol Reference",
+        "Resources & Further Reading"
     ])
     
     st.markdown("---")
@@ -484,6 +485,134 @@ elif page == "Logic Symbol Reference":
             with col2:
                 st.write(f"**Geometric Form**: {geometry}")
                 st.write(f"**Metaphysical Meaning**: {meaning}")
+
+elif page == "Resources & Further Reading":
+    st.header("📚 Resources & Further Reading")
+    
+    # Create tabs for different resource categories
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Philosophy Basics", "Logic & Symbolic Logic", "Metaphysics", "Online Resources", "Study Tools"])
+    
+    with tab1:
+        st.subheader("📖 Essential Philosophy Texts")
+        
+        st.markdown("""
+        ### Introductory Philosophy
+        - **Nigel Warburton** - *Philosophy: The Basics* (6th Edition)
+        - **Thomas Nagel** - *What Does It All Mean?: A Very Short Introduction to Philosophy*
+        - **Sophie's World** by Jostein Gaarder (accessible introduction through narrative)
+        
+        ### Classic Philosophical Works
+        - **Plato** - *The Republic* (Theory of Forms, Cave Allegory)
+        - **Aristotle** - *Nicomachean Ethics* (Virtue Ethics)
+        - **René Descartes** - *Meditations on First Philosophy*
+        - **Immanuel Kant** - *Critique of Pure Reason* (advanced)
+        
+        ### Contemporary Philosophy
+        - **Bertrand Russell** - *The Problems of Philosophy*
+        - **John Rawls** - *A Theory of Justice*
+        - **Daniel Dennett** - *Intuition Pumps and Other Tools for Thinking*
+        """)
+    
+    with tab2:
+        st.subheader("🔗 Logic & Symbolic Logic")
+        
+        st.markdown("""
+        ### Introductory Logic
+        - **Patrick J. Hurley** - *A Concise Introduction to Logic* (12th Edition)
+        - **Irving M. Copi** - *Introduction to Logic* (classic textbook)
+        - **Paul Bergmann** - *The Logic Book* (comprehensive coverage)
+        
+        ### Symbolic Logic
+        - **Elliott Mendelson** - *Mathematical Logic* (advanced)
+        - **Herbert B. Enderton** - *A Mathematical Introduction to Logic*
+        - **Shoenfield** - *Mathematical Logic* (graduate level)
+        
+        ### Logic Symbol References
+        - **Stanford Encyclopedia of Philosophy** - "Logic, Classical"
+        - **Internet Encyclopedia of Philosophy** - "Symbolic Logic"
+        - **Wolfram MathWorld** - Logic symbols and notation guide
+        """)
+    
+    with tab3:
+        st.subheader("🌌 Metaphysics")
+        
+        st.markdown("""
+        ### Classical Metaphysics
+        - **Aristotle** - *Metaphysics* (foundational text)
+        - **Aquinas** - *Summa Theologica* (medieval synthesis)
+        - **Spinoza** - *Ethics* (geometric method in metaphysics)
+        
+        ### Modern Metaphysics
+        - **David Hume** - *An Enquiry Concerning Human Understanding*
+        - **Immanuel Kant** - *Critique of Pure Reason*
+        - **G.W.F. Hegel** - *Science of Logic* (advanced)
+        
+        ### Contemporary Metaphysics
+        - **David Lewis** - *On the Plurality of Worlds* (modal realism)
+        - **Peter van Inwagen** - *Metaphysics* (excellent overview)
+        - **Ted Sider** - *Writing the Book of the World* (recent developments)
+        
+        ### Philosophy of Mathematics & Science
+        - **Morris Kline** - *Mathematics: The Loss of Certainty*
+        - **Thomas Kuhn** - *The Structure of Scientific Revolutions*
+        - **Karl Popper** - *The Logic of Scientific Discovery*
+        """)
+    
+    with tab4:
+        st.subheader("🌐 Online Resources")
+        
+        st.markdown("""
+        ### Academic Databases
+        - **[Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/)** - Authoritative philosophical articles
+        - **[Internet Encyclopedia of Philosophy](https://iep.utm.edu/)** - Peer-reviewed philosophy articles
+        - **[PhilPapers](https://philpapers.org/)** - Comprehensive bibliography of philosophy
+        - **[Philosophy Compass](https://onlinelibrary.wiley.com/journal/17479991)** - Survey articles
+        
+        ### Educational Websites
+        - **[Crash Course Philosophy](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNgK6MZucdYldNkMybYIHKR)** - Video introductions
+        - **[Philosophy Bites](https://www.philosophybites.com/)** - Short philosophy podcasts
+        - **[MIT OpenCourseWare Philosophy](https://ocw.mit.edu/courses/linguistics-and-philosophy/)** - Free course materials
+        - **[Khan Academy Philosophy](https://www.khanacademy.org/humanities/intro-to-philosophy)** - Interactive lessons
+        
+        ### Professional Organizations
+        - **[American Philosophical Association](https://www.apaonline.org/)**
+        - **[Philosophy Documentation Center](https://www.pdcnet.org/)**
+        - **[Society for Teaching and Learning in Higher Education](https://www.stlhe.ca/)**
+        """)
+    
+    with tab5:
+        st.subheader("🎯 Study Tools & Tips")
+        
+        st.markdown("""
+        ### Study Strategies for Philosophy
+        
+        **Reading Philosophy Texts:**
+        1. **Read slowly and carefully** - Philosophy requires careful attention to precise language
+        2. **Take notes on arguments** - Identify premises and conclusions
+        3. **Look up unfamiliar terms** - Philosophy has technical vocabulary
+        4. **Read sections multiple times** - Dense arguments often require re-reading
+        
+        **Writing Philosophy Papers:**
+        1. **State your thesis clearly** - What exactly are you arguing?
+        2. **Explain the argument you're addressing** - Show you understand the position
+        3. **Present your objection or support** - Give reasons for your view
+        4. **Consider counterarguments** - What would critics say?
+        
+        ### Critical Thinking Tools
+        - **Argument mapping** - Visual representation of logical structure
+        - **Socratic questioning** - Ask "why?" and "how do you know?"
+        - **Steel-manning** - Present the strongest version of opposing views
+        - **Principle of charity** - Interpret others' arguments in their best light
+        
+        ### Logic Practice
+        - **Truth tables** - Practice with conjunction, disjunction, negation
+        - **Argument forms** - Learn modus ponens, modus tollens, etc.
+        - **Fallacy identification** - Study common logical errors
+        - **Symbolic translation** - Convert English into logical notation
+        """)
+    
+    st.markdown("---")
+    st.info("💡 **Note**: This course presents an interpretive framework connecting logic symbols to metaphysical concepts. While this can stimulate philosophical thinking, remember to distinguish between established philosophical scholarship and speculative interpretive frameworks when doing research.")
 
 # Footer
 st.markdown("---")
