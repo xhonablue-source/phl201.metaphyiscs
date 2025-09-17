@@ -2,6 +2,18 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from typing import List, Dict, Optional
+
+# 🔐 SECURE API KEY HANDLING
+# Your API key is stored in Streamlit secrets - students never see it
+try:
+    ANTHROPIC_API_KEY = st.secrets["ANTHROPIC_API_KEY"]
+except KeyError:
+    ANTHROPIC_API_KEY = None
+
+# Fallback: Allow manual API key input for testing
+if not ANTHROPIC_API_KEY:
+    ANTHROPIC_API_KEY = st.sidebar.text_input("🔑 Anthropic API Key (for testing)", type="password")
 
 st.set_page_config(page_title="PHL 201: Metaphysics CognitiveCloud.ai", layout="wide", initial_sidebar_state="expanded")
 
@@ -388,7 +400,8 @@ with st.sidebar:
         "Interactive Quiz", 
         "Visualizations", 
         "Logic Symbol Reference",
-        "Resources & Further Reading"
+        "Resources & Further Reading",
+        "🤖 AI Philosophy Assistant"
     ])
     
     st.markdown("---")
@@ -792,6 +805,157 @@ elif page == "Resources & Further Reading":
         st.markdown("**[MIT Logic](https://logitext.mit.edu/)**")
     with col4:
         st.markdown("**[Philosophy Bites](https://www.philosophybites.com/)**")
+
+elif page == "🤖 AI Philosophy Assistant":
+    st.header("🤖 AI Philosophy Assistant")
+    st.markdown("**Ask deep questions about metaphysics, logic symbols, and the nature of reality**")
+    
+    # Check if API key is available
+    if not ANTHROPIC_API_KEY:
+        st.error("🔑 API key required. Please add your Anthropic API key in the sidebar to use the AI assistant.")
+        st.info("This feature requires an Anthropic API key to function. Contact your instructor if you need access.")
+    else:
+        try:
+            import anthropic
+            
+            # Initialize Anthropic client
+            client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+            
+            # Suggested important questions
+            st.subheader("💡 Suggested Philosophical Questions")
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("**Logic & Symbols:**")
+                if st.button("Why do logic symbols have geometric shapes?", use_container_width=True):
+                    st.session_state.current_question = "Why do logic symbols have geometric shapes? How does their visual form relate to their meaning?"
+                
+                if st.button("What is the epsilon (ε) principle?", use_container_width=True):
+                    st.session_state.current_question = "Explain the epsilon principle and how it reveals that linearity is infinitely small."
+                
+                if st.button("How does ∧ embody convergence?", use_container_width=True):
+                    st.session_state.current_question = "How does the conjunction symbol ∧ geometrically represent convergence and unity in metaphysics?"
+            
+            with col2:
+                st.markdown("**Metaphysical Foundations:**")
+                if st.button("What is the relationship between being and truth?", use_container_width=True):
+                    st.session_state.current_question = "What does it mean that being and truth are convertible? How do thinking and reality share the same structure?"
+                
+                if st.button("Why is reality wave-like rather than linear?", use_container_width=True):
+                    st.session_state.current_question = "How does string theory confirm that reality is fundamentally wave-like and relational rather than linear and mechanical?"
+                
+                if st.button("What is spherical totality?", use_container_width=True):
+                    st.session_state.current_question = "Explain the concept of spherical totality where each point contains the pattern of the whole."
+            
+            # Initialize chat history in session state
+            if 'chat_history' not in st.session_state:
+                st.session_state.chat_history = []
+            
+            # Handle suggested questions
+            if 'current_question' in st.session_state:
+                st.session_state.user_input = st.session_state.current_question
+                del st.session_state.current_question
+            
+            # Chat interface
+            st.subheader("💬 Philosophy Chat")
+            
+            # Display chat history
+            for i, (question, answer) in enumerate(st.session_state.chat_history):
+                with st.container():
+                    st.markdown(f"**🧠 You:** {question}")
+                    st.markdown(f"**🤖 Assistant:** {answer}")
+                    st.markdown("---")
+            
+            # User input
+            user_question = st.text_area(
+                "Ask your philosophical question:",
+                value=st.session_state.get('user_input', ''),
+                height=100,
+                placeholder="e.g., How do logic symbols encode the structure of reality?"
+            )
+            
+            col1, col2 = st.columns([1, 4])
+            with col1:
+                ask_button = st.button("🔮 Ask Assistant", type="primary")
+            with col2:
+                if st.button("🗑️ Clear Chat History"):
+                    st.session_state.chat_history = []
+                    st.rerun()
+            
+            if ask_button and user_question.strip():
+                with st.spinner("🤔 Contemplating your philosophical question..."):
+                    try:
+                        # Create context-aware prompt
+                        system_prompt = """You are a philosophical assistant specializing in metaphysics and logic. You're helping students in a course that explores how logic symbols encode geometric intuitions about reality's structure. The course framework includes:
+
+1. Logic symbols as geometric forms (∧ = convergence, ∨ = divergence, ¬ = boundary creation)
+2. The epsilon (ε) principle: linearity is infinitely small and dissolves into wave patterns
+3. String theory connections to sinusoidal foundations of reality
+4. Dimensional transcendence from linear to spherical totality
+5. The convertibility of being and truth
+
+Provide thoughtful, academically rigorous responses that connect to these themes while acknowledging when ideas are interpretive frameworks versus established scholarship. Be clear about distinguishing between metaphorical/pedagogical frameworks and empirical claims."""
+
+                        # Get response from Claude
+                        message = client.messages.create(
+                            model="claude-3-haiku-20240307",
+                            max_tokens=1000,
+                            temperature=0.7,
+                            system=system_prompt,
+                            messages=[{
+                                "role": "user", 
+                                "content": user_question
+                            }]
+                        )
+                        
+                        response = message.content[0].text
+                        
+                        # Add to chat history
+                        st.session_state.chat_history.append((user_question, response))
+                        
+                        # Clear input
+                        st.session_state.user_input = ""
+                        
+                        # Rerun to show new response
+                        st.rerun()
+                        
+                    except Exception as e:
+                        st.error(f"Error getting response: {str(e)}")
+                        st.info("Please check your API key and try again.")
+        
+        except ImportError:
+            st.error("📦 Missing required library. Please install: `pip install anthropic`")
+            st.info("The Anthropic library is required for the AI assistant functionality.")
+    
+    # Philosophy tips
+    st.markdown("---")
+    st.subheader("💡 Tips for Philosophical Inquiry")
+    
+    tip_cols = st.columns(3)
+    with tip_cols[0]:
+        st.markdown("""
+        **🤔 Ask Deep Questions**
+        - Why does this concept exist?
+        - What assumptions am I making?
+        - How do the pieces connect?
+        """)
+    
+    with tip_cols[1]:
+        st.markdown("""
+        **🔍 Examine Closely**
+        - What exactly does this mean?
+        - Can I think of counterexamples?
+        - What would critics say?
+        """)
+    
+    with tip_cols[2]:
+        st.markdown("""
+        **🌐 Connect Ideas**
+        - How does this relate to other concepts?
+        - What are the implications?
+        - Where does this lead?
+        """)
 
 # Footer
 st.markdown("---")
