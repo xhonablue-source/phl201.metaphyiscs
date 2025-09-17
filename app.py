@@ -487,132 +487,252 @@ elif page == "Logic Symbol Reference":
                 st.write(f"**Metaphysical Meaning**: {meaning}")
 
 elif page == "Resources & Further Reading":
-    st.header("📚 Resources & Further Reading")
+    st.header("🎯 Interactive Philosophy Resources")
     
     # Create tabs for different resource categories
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Philosophy Basics", "Logic & Symbolic Logic", "Metaphysics", "Online Resources", "Study Tools"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Quick Start", "Interactive Logic", "Philosophy Videos", "Research Tools", "Practice Hub"])
     
     with tab1:
-        st.subheader("📖 Essential Philosophy Texts")
+        st.subheader("🚀 Jump Into Philosophy")
         
-        st.markdown("""
-        ### Introductory Philosophy
-        - **Nigel Warburton** - *Philosophy: The Basics* (6th Edition)
-        - **Thomas Nagel** - *What Does It All Mean?: A Very Short Introduction to Philosophy*
-        - **Sophie's World** by Jostein Gaarder (accessible introduction through narrative)
+        col1, col2 = st.columns(2)
         
-        ### Classic Philosophical Works
-        - **Plato** - *The Republic* (Theory of Forms, Cave Allegory)
-        - **Aristotle** - *Nicomachean Ethics* (Virtue Ethics)
-        - **René Descartes** - *Meditations on First Philosophy*
-        - **Immanuel Kant** - *Critique of Pure Reason* (advanced)
+        with col1:
+            st.markdown("### 📚 Essential First Reads")
+            
+            if st.button("📖 Stanford Encyclopedia: Metaphysics", use_container_width=True):
+                st.markdown("**[Stanford Encyclopedia of Philosophy - Metaphysics](https://plato.stanford.edu/entries/metaphysics/)**")
+                st.info("Authoritative overview of metaphysical concepts - perfect for understanding the foundations behind our symbolic framework.")
+            
+            if st.button("🧠 What Does It All Mean? (Free PDF)", use_container_width=True):
+                st.markdown("**Thomas Nagel's Classic Introduction**")
+                st.info("Check your university library's digital access or [Project MUSE](https://muse.jhu.edu/) for this essential text.")
+            
+            if st.button("🎭 Philosophy Bites Podcast", use_container_width=True):
+                st.markdown("**[Philosophy Bites](https://www.philosophybites.com/)**")
+                st.info("15-minute philosophy podcasts with world-class philosophers. Start with their logic and metaphysics episodes.")
         
-        ### Contemporary Philosophy
-        - **Bertrand Russell** - *The Problems of Philosophy*
-        - **John Rawls** - *A Theory of Justice*
-        - **Daniel Dennett** - *Intuition Pumps and Other Tools for Thinking*
-        """)
+        with col2:
+            st.markdown("### 🔗 Logic Foundations")
+            
+            if st.button("⚡ Interactive Logic Tutorial", use_container_width=True):
+                st.markdown("**[Logitext - Visual Logic](https://logitext.mit.edu/)**")
+                st.info("MIT's interactive logic tool. Practice the symbols we explore in class with immediate feedback.")
+            
+            if st.button("🎯 Truth Table Generator", use_container_width=True):
+                st.markdown("**[Logic Calculator](https://web.stanford.edu/class/cs103/tools/truth-table-tool/)**")
+                st.info("Stanford's tool for testing logical expressions. Input ∧, ∨, ¬ and see how they work.")
+            
+            if st.button("📊 Argument Mapper", use_container_width=True):
+                st.markdown("**[Argument Mapping Tools](https://arguman.org/)**")
+                st.info("Visual argument analysis - see how premises connect to conclusions geometrically.")
     
     with tab2:
-        st.subheader("🔗 Logic & Symbolic Logic")
+        st.subheader("🔧 Interactive Logic Practice")
         
-        st.markdown("""
-        ### Introductory Logic
-        - **Patrick J. Hurley** - *A Concise Introduction to Logic* (12th Edition)
-        - **Irving M. Copi** - *Introduction to Logic* (classic textbook)
-        - **Paul Bergmann** - *The Logic Book* (comprehensive coverage)
+        st.markdown("### Quick Logic Challenges")
         
-        ### Symbolic Logic
-        - **Elliott Mendelson** - *Mathematical Logic* (advanced)
-        - **Herbert B. Enderton** - *A Mathematical Introduction to Logic*
-        - **Shoenfield** - *Mathematical Logic* (graduate level)
+        col1, col2, col3 = st.columns(3)
         
-        ### Logic Symbol References
-        - **Stanford Encyclopedia of Philosophy** - "Logic, Classical"
-        - **Internet Encyclopedia of Philosophy** - "Symbolic Logic"
-        - **Wolfram MathWorld** - Logic symbols and notation guide
-        """)
+        with col1:
+            if st.button("🎮 Logic Game 1: Symbol Matching", use_container_width=True):
+                st.markdown("**Challenge: Match symbols to meanings**")
+                symbols = ["∧", "∨", "¬", "→", "↔"]
+                meanings = ["AND", "OR", "NOT", "IMPLIES", "IF AND ONLY IF"]
+                
+                # Simple matching exercise
+                st.write("**Symbols:** " + " | ".join(symbols))
+                st.write("**Meanings:** " + " | ".join(meanings))
+                
+                answer = st.text_input("Type your matches (e.g., ∧=AND, ∨=OR...)")
+                if st.button("Check Answer"):
+                    if "∧=AND" in answer and "∨=OR" in answer:
+                        st.success("Correct! You understand the basic geometric intuitions.")
+                    else:
+                        st.error("Try again - think about convergence vs divergence.")
+        
+        with col2:
+            if st.button("🧩 Logic Game 2: Truth Tables", use_container_width=True):
+                st.markdown("**Challenge: Complete the truth table**")
+                
+                # Simple truth table practice
+                st.write("**P ∧ Q (P AND Q)**")
+                st.write("P=True, Q=True → ?")
+                st.write("P=True, Q=False → ?")
+                st.write("P=False, Q=True → ?")
+                st.write("P=False, Q=False → ?")
+                
+                answers = st.multiselect("Select correct outputs:", ["True", "False", "True", "False", "True", "False", "True", "False"])
+                if st.button("Check Truth Table"):
+                    if answers == ["True", "False", "False", "False"]:
+                        st.success("Perfect! ∧ requires both conditions to converge.")
+                    else:
+                        st.error("Remember: ∧ is true only when both inputs are true.")
+        
+        with col3:
+            if st.button("🌊 Epsilon Challenge", use_container_width=True):
+                st.markdown("**Challenge: Epsilon intuition**")
+                
+                epsilon_input = st.slider("What happens as ε approaches 0?", 0.01, 1.0, 0.5)
+                
+                if epsilon_input < 0.1:
+                    st.success("Exactly! As ε→0, linearity collapses into wave patterns.")
+                    st.write("🌊 You're grasping the infinitesimal principle!")
+                else:
+                    st.info("Try moving the slider closer to zero...")
     
     with tab3:
-        st.subheader("🌌 Metaphysics")
+        st.subheader("🎬 Philosophy in Action")
         
-        st.markdown("""
-        ### Classical Metaphysics
-        - **Aristotle** - *Metaphysics* (foundational text)
-        - **Aquinas** - *Summa Theologica* (medieval synthesis)
-        - **Spinoza** - *Ethics* (geometric method in metaphysics)
+        col1, col2 = st.columns(2)
         
-        ### Modern Metaphysics
-        - **David Hume** - *An Enquiry Concerning Human Understanding*
-        - **Immanuel Kant** - *Critique of Pure Reason*
-        - **G.W.F. Hegel** - *Science of Logic* (advanced)
+        with col1:
+            st.markdown("### 📺 Essential Philosophy Videos")
+            
+            if st.button("🏛️ Plato's Cave (Animated)", use_container_width=True):
+                st.markdown("**[TED-Ed: Plato's Allegory of the Cave](https://www.youtube.com/watch?v=1RWOpQXTltA)**")
+                st.info("4-minute animated explanation - connects to our dimensional transcendence concepts.")
+            
+            if st.button("🧠 What is Consciousness?", use_container_width=True):
+                st.markdown("**[Crash Course Philosophy #8](https://www.youtube.com/watch?v=GDrBFu5diBs)**")
+                st.info("Explores the hard problem of consciousness - relates to our being/thinking unity.")
+            
+            if st.button("⚖️ Kant in 90 Seconds", use_container_width=True):
+                st.markdown("**[Philosophy Tube: Kant](https://www.youtube.com/watch?v=xwOCmJevigw)**")
+                st.info("Quick intro to transcendental idealism - connects to our meta-geometric principles.")
         
-        ### Contemporary Metaphysics
-        - **David Lewis** - *On the Plurality of Worlds* (modal realism)
-        - **Peter van Inwagen** - *Metaphysics* (excellent overview)
-        - **Ted Sider** - *Writing the Book of the World* (recent developments)
-        
-        ### Philosophy of Mathematics & Science
-        - **Morris Kline** - *Mathematics: The Loss of Certainty*
-        - **Thomas Kuhn** - *The Structure of Scientific Revolutions*
-        - **Karl Popper** - *The Logic of Scientific Discovery*
-        """)
+        with col2:
+            st.markdown("### 🎓 Academic Lectures")
+            
+            if st.button("🔬 MIT: Metaphysics Lecture", use_container_width=True):
+                st.markdown("**[MIT OpenCourseWare](https://ocw.mit.edu/courses/linguistics-and-philosophy/24-221-metaphysics-fall-2005/)**")
+                st.info("Full university-level metaphysics course materials available free.")
+            
+            if st.button("📐 Logic & Mathematics", use_container_width=True):
+                st.markdown("**[Stanford: Mathematical Logic](https://www.youtube.com/playlist?list=PL_onPhFCkVQiZgE9U539_QmKLJV_0YvlQ)**")
+                st.info("Deep dive into formal logic systems - foundation for symbolic reasoning.")
+            
+            if st.button("🌀 String Theory & Philosophy", use_container_width=True):
+                st.markdown("**[Royal Institution Lectures](https://www.youtube.com/watch?v=YtdE662eY_M)**")
+                st.info("Physics meets philosophy - explores the mathematical nature of reality.")
     
     with tab4:
-        st.subheader("🌐 Online Resources")
+        st.subheader("🔍 Research & Analysis Tools")
         
-        st.markdown("""
-        ### Academic Databases
-        - **[Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/)** - Authoritative philosophical articles
-        - **[Internet Encyclopedia of Philosophy](https://iep.utm.edu/)** - Peer-reviewed philosophy articles
-        - **[PhilPapers](https://philpapers.org/)** - Comprehensive bibliography of philosophy
-        - **[Philosophy Compass](https://onlinelibrary.wiley.com/journal/17479991)** - Survey articles
+        col1, col2 = st.columns(2)
         
-        ### Educational Websites
-        - **[Crash Course Philosophy](https://www.youtube.com/playlist?list=PL8dPuuaLjXtNgK6MZucdYldNkMybYIHKR)** - Video introductions
-        - **[Philosophy Bites](https://www.philosophybites.com/)** - Short philosophy podcasts
-        - **[MIT OpenCourseWare Philosophy](https://ocw.mit.edu/courses/linguistics-and-philosophy/)** - Free course materials
-        - **[Khan Academy Philosophy](https://www.khanacademy.org/humanities/intro-to-philosophy)** - Interactive lessons
+        with col1:
+            st.markdown("### 🗃️ Academic Databases")
+            
+            if st.button("📚 PhilPapers Search", use_container_width=True):
+                st.markdown("**[PhilPapers.org](https://philpapers.org/)**")
+                st.info("Search over 2.9 million philosophy papers. Try searching 'logic symbolism' or 'metaphysics mathematics'.")
+                
+                search_term = st.text_input("Quick search term:")
+                if search_term:
+                    st.markdown(f"**[Search PhilPapers for '{search_term}'](https://philpapers.org/s/{search_term})**")
+            
+            if st.button("🎓 Stanford Encyclopedia", use_container_width=True):
+                st.markdown("**[Stanford Encyclopedia of Philosophy](https://plato.stanford.edu/)**")
+                st.info("Gold standard for philosophical information - peer-reviewed and authoritative.")
+            
+            if st.button("📖 Internet Encyclopedia", use_container_width=True):
+                st.markdown("**[Internet Encyclopedia of Philosophy](https://iep.utm.edu/)**")
+                st.info("Comprehensive philosophy articles - good for getting different perspectives.")
         
-        ### Professional Organizations
-        - **[American Philosophical Association](https://www.apaonline.org/)**
-        - **[Philosophy Documentation Center](https://www.pdcnet.org/)**
-        - **[Society for Teaching and Learning in Higher Education](https://www.stlhe.ca/)**
-        """)
+        with col2:
+            st.markdown("### 🛠️ Analysis Tools")
+            
+            if st.button("🗺️ Argument Mapping", use_container_width=True):
+                st.markdown("**[Rationale Online](https://www.rationaleonline.com/)**")
+                st.info("Visual argument analysis - map premises and conclusions like geometric structures.")
+            
+            if st.button("📊 Logic Checker", use_container_width=True):
+                st.markdown("**[Logic & Arguments](https://logic.stanford.edu/)**")
+                st.info("Stanford's logic tools - verify symbolic logic expressions.")
+            
+            if st.button("🔬 Citation Builder", use_container_width=True):
+                st.markdown("**[ZBib by Zotero](https://zbib.org/)**")
+                st.info("Auto-generate citations for philosophy papers - just paste URLs.")
     
     with tab5:
-        st.subheader("🎯 Study Tools & Tips")
+        st.subheader("💪 Philosophy Practice Hub")
         
-        st.markdown("""
-        ### Study Strategies for Philosophy
+        st.markdown("### Quick Philosophy Workouts")
         
-        **Reading Philosophy Texts:**
-        1. **Read slowly and carefully** - Philosophy requires careful attention to precise language
-        2. **Take notes on arguments** - Identify premises and conclusions
-        3. **Look up unfamiliar terms** - Philosophy has technical vocabulary
-        4. **Read sections multiple times** - Dense arguments often require re-reading
+        practice_type = st.selectbox("Choose your practice:", [
+            "Argument Analysis",
+            "Symbol Translation", 
+            "Thought Experiments",
+            "Definition Building"
+        ])
         
-        **Writing Philosophy Papers:**
-        1. **State your thesis clearly** - What exactly are you arguing?
-        2. **Explain the argument you're addressing** - Show you understand the position
-        3. **Present your objection or support** - Give reasons for your view
-        4. **Consider counterarguments** - What would critics say?
+        if practice_type == "Argument Analysis":
+            st.markdown("**Practice: Break down this argument**")
+            argument = st.text_area("Paste an argument here:", 
+                                   "All logic symbols have geometric meaning. ∧ is a logic symbol. Therefore, ∧ has geometric meaning.")
+            
+            if st.button("Analyze Structure"):
+                if argument:
+                    st.write("**Premise 1:** All logic symbols have geometric meaning")
+                    st.write("**Premise 2:** ∧ is a logic symbol") 
+                    st.write("**Conclusion:** Therefore, ∧ has geometric meaning")
+                    st.write("**Form:** Valid syllogism (All A are B, X is A, therefore X is B)")
         
-        ### Critical Thinking Tools
-        - **Argument mapping** - Visual representation of logical structure
-        - **Socratic questioning** - Ask "why?" and "how do you know?"
-        - **Steel-manning** - Present the strongest version of opposing views
-        - **Principle of charity** - Interpret others' arguments in their best light
+        elif practice_type == "Symbol Translation":
+            st.markdown("**Practice: Translate to symbols**")
+            english = st.text_input("English statement:", "If it rains, then the ground gets wet")
+            
+            if st.button("Show Translation"):
+                if "if" in english.lower() and "then" in english.lower():
+                    st.write("**Symbolic form:** P → Q")
+                    st.write("**Where:** P = 'it rains', Q = 'ground gets wet'")
+                    st.write("**Geometric meaning:** Arrow shows causal flow")
         
-        ### Logic Practice
-        - **Truth tables** - Practice with conjunction, disjunction, negation
-        - **Argument forms** - Learn modus ponens, modus tollens, etc.
-        - **Fallacy identification** - Study common logical errors
-        - **Symbolic translation** - Convert English into logical notation
-        """)
+        elif practice_type == "Thought Experiments":
+            experiments = [
+                "🧠 **Ship of Theseus**: If you replace every part of a ship, is it still the same ship?",
+                "🏛️ **Plato's Cave**: What if everything you think is real is just shadows?", 
+                "🤖 **Chinese Room**: Can a computer truly understand, or just manipulate symbols?",
+                "∞ **Infinite Hotel**: A hotel with infinite rooms gets a new guest..."
+            ]
+            
+            selected = st.selectbox("Choose a thought experiment:", experiments)
+            if st.button("Explore This"):
+                st.info("Think through the implications... what does this reveal about reality's nature?")
+        
+        elif practice_type == "Definition Building":
+            st.markdown("**Practice: Define key terms**")
+            term = st.selectbox("Define:", ["Metaphysics", "Logic", "Epsilon", "Being", "Truth"])
+            
+            definition = st.text_area(f"Your definition of {term}:")
+            
+            if st.button("Compare with Standard"):
+                definitions = {
+                    "Metaphysics": "The branch of philosophy that examines the nature of reality, being, and existence itself.",
+                    "Logic": "The study of valid reasoning and argument structure.",
+                    "Epsilon": "In mathematics, an arbitrarily small positive quantity; in our framework, the infinitesimal scale where linearity dissolves.",
+                    "Being": "The quality or state of existence; what it means for something to exist.",
+                    "Truth": "Correspondence between statements and reality; in our framework, convertible with being itself."
+                }
+                st.write(f"**Standard definition:** {definitions[term]}")
+                if definition:
+                    st.write(f"**Your definition:** {definition}")
     
     st.markdown("---")
-    st.info("💡 **Note**: This course presents an interpretive framework connecting logic symbols to metaphysical concepts. While this can stimulate philosophical thinking, remember to distinguish between established philosophical scholarship and speculative interpretive frameworks when doing research.")
+    st.warning("**Academic Note**: This course presents an interpretive framework connecting logic symbols to metaphysical concepts. While this can stimulate philosophical thinking, distinguish between established scholarship and speculative frameworks when conducting research.")
+    
+    # Quick access footer
+    st.markdown("### 🔗 Quick Links")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.markdown("**[Stanford Phil](https://plato.stanford.edu/)**")
+    with col2:
+        st.markdown("**[PhilPapers](https://philpapers.org/)**")
+    with col3:
+        st.markdown("**[MIT Logic](https://logitext.mit.edu/)**")
+    with col4:
+        st.markdown("**[Philosophy Bites](https://www.philosophybites.com/)**")
 
 # Footer
 st.markdown("---")
